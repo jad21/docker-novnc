@@ -49,7 +49,7 @@ RUN git clone https://github.com/kanaka/noVNC.git /root/noVNC \
 	&& rm -rf /root/noVNC/utils/websockify/.git
 
 # Modify the launch script 'ps -p'
-RUN sed -i -- "s/ps -p/ps -o pid | grep/g" /root/noVNC/utils/launch.sh
+# RUN sed -i -- "s/ps -p/ps -o pid | grep/g" /root/noVNC/utils/launch.sh
 
 
 ENV VNC_PASSWD=admin 
