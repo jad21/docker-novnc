@@ -1,16 +1,20 @@
-FROM ubuntu:focal
+FROM debian:stretch
 
-RUN apt-get update \
- && apt-get upgrade -y
-
-RUN apt-get install --no-install-recommends -y \
-    fluxbox           \
-    openssl           \
-    websockify        \
-    x11vnc            \
-    xterm             \
-    wget             \
-    xvfb
+# Install git, supervisor, VNC, & X11 packages
+RUN set -ex; \
+    apt-get update; \
+    apt-get install -y \
+      bash \
+      fluxbox \
+      git \
+      net-tools \
+      novnc \
+      socat \
+      supervisor \
+      x11vnc \
+      xterm \
+      xvfb
+    
 
 # Install Chrome. #
 
@@ -25,15 +29,19 @@ RUN apt-get update && apt-get -y install google-chrome-stable
 
 RUN apt autoremove -y
 
-RUN groupadd jubap && mkdir /home/jubap     \
- && useradd -s /bin/bash -g jubap jubap     \
- && cp /etc/skel/.bashrc /home/jubap/.bashrc \
- && echo "cd ~/share" >> /home/jubap/.bashrc
-
+# Setup demo environment variables
+ENV HOME=/root \
+    DEBIAN_FRONTEND=noninteractive \
+    LANG=en_US.UTF-8 \
+    LANGUAGE=en_US.UTF-8 \
+    LC_ALL=C.UTF-8 \
+    DISPLAY=:0.0 \
+    DISPLAY_WIDTH=1024 \
+    DISPLAY_HEIGHT=768 \
+    RUN_XTERM=yes \
+    RUN_FLUXBOX=yes
 
 ENV VNC_PASSWD=admin 
-COPY ./entrypoint.sh /home/jubap/
-
-EXPOSE 5900
-
-ENTRYPOINT ["/bin/bash", "/home/jubap/entrypoint.sh"]
+COPY . /app
+RUN chmod +x /app/conf.d/websockify.sh
+CMD ["/app/entrypoint.sh"]
