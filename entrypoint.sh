@@ -15,7 +15,7 @@ passwdfile="${_home}/share/vncpass.$(hostname)"
 # Generate passwords for full access and view-only access.
 head -c 24 /dev/urandom | base64 >  ${passwdfile}
 head -c 24 /dev/urandom | base64 >> ${passwdfile}
-echo $VNC_PASSWD >> ${passwdfile}
+echo$VNC_PASSWD >> ${passwdfile}
 
 chmod 400 ${_home}/share/*
 chown -R jubap:jubap ${_home}
@@ -36,7 +36,7 @@ _chroot="chroot --userspec=jubap:jubap / env HOME=${_home}"
 
 ${_chroot} websockify -D                 \
     --cert ${_home}/share/websockify.pem \
-    --ssl-only 0.0.0.0:6080 0.0.0.0:5900
+    0.0.0.0:6080 127.0.0.1:5900
 
 exec ${_chroot} /bin/bash -c "x11vnc    \
     -create -localhost -shared -forever \
