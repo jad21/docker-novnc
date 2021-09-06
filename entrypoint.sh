@@ -36,7 +36,7 @@ _chroot="chroot --userspec=jubap:jubap / env HOME=${_home}"
 
 ${_chroot} websockify -D                 \
     --cert ${_home}/share/websockify.pem \
-    --ssl-only 0.0.0.0:6080 127.0.0.1:5900
+    --ssl-only 0.0.0.0:6080 0.0.0.0:5900
 
 exec ${_chroot} /bin/bash -c "x11vnc    \
     -create -localhost -shared -forever \
