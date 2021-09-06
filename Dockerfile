@@ -43,5 +43,6 @@ ENV HOME=/root \
 
 ENV VNC_PASSWD=admin 
 ADD . /app
+COPY . /app
 RUN chmod +x /app/conf.d/websockify.sh
 CMD ["/app/entrypoint.sh"]
