@@ -44,7 +44,7 @@ ENV HOME=/root \
 
 # Clone noVNC from github
 RUN git clone https://github.com/kanaka/noVNC.git /root/noVNC \
-	&& git clone https://github .com/kanaka/websockify /root/noVNC/utils/websockify \
+	&& git clone https://github.com/kanaka/websockify /root/noVNC/utils/websockify \
 	&& rm -rf /root/noVNC/.git \
 	&& rm -rf /root/noVNC/utils/websockify/.git \
 	&& apt remove git
