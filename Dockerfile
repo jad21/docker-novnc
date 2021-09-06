@@ -42,6 +42,6 @@ ENV HOME=/root \
     RUN_FLUXBOX=yes
 
 ENV VNC_PASSWD=admin 
-COPY . /app
+ADD . /app
 RUN chmod +x /app/conf.d/websockify.sh
 CMD ["/app/entrypoint.sh"]
