@@ -1,4 +1,4 @@
-FROM debian:buster-slim
+FROM ubuntu:focal
 
 RUN apt-get update \
  && apt-get upgrade -y
