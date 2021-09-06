@@ -9,6 +9,7 @@ RUN apt-get install --no-install-recommends -y \
     websockify        \
     x11vnc            \
     xterm             \
+    wget             \
     xvfb
 
 
