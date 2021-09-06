@@ -32,7 +32,7 @@ RUN groupadd jubap && mkdir /home/jubap     \
 
 
 ENV VNC_PASSWD=admin 
-COPY ./entrypoint.sh /home/jubap/
+ADD ./entrypoint.sh /home/jubap/
 
 EXPOSE 5900
 
