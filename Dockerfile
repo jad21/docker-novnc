@@ -34,6 +34,6 @@ RUN groupadd jubap && mkdir /home/jubap     \
 ENV VNC_PASSWD=admin 
 COPY ./entrypoint.sh /home/jubap/
 
-EXPOSE 5900/tcp
+EXPOSE 5900
 
 ENTRYPOINT ["/bin/bash", "/home/jubap/entrypoint.sh"]
