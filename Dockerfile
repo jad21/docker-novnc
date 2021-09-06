@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:buster
 
 # Install git, supervisor, VNC, & X11 packages
 RUN set -ex; \
@@ -9,12 +9,10 @@ RUN set -ex; \
       git \
       net-tools \
       novnc \
-      socat \
       supervisor \
       x11vnc \
       xterm \
       xvfb
-    
 
 # Install Chrome. #
 
@@ -26,8 +24,6 @@ RUN wget --no-check-certificate -q -O - https://dl-ssl.google.com/linux/linux_si
 
 RUN apt-get update && apt-get -y install google-chrome-stable
 
-
-RUN apt autoremove -y
 
 # Setup demo environment variables
 ENV HOME=/root \
@@ -41,22 +37,6 @@ ENV HOME=/root \
     RUN_XTERM=yes \
     RUN_FLUXBOX=yes
 
-
-# Clone noVNC from github
-RUN git clone https://github.com/kanaka/noVNC.git /root/noVNC \
-	&& git clone https://github.com/kanaka/websockify /root/noVNC/utils/websockify \
-	&& rm -rf /root/noVNC/.git \
-	&& rm -rf /root/noVNC/utils/websockify/.git
-
-# Modify the launch script 'ps -p'
-# RUN sed -i -- "s/ps -p/ps -o pid | grep/g" /root/noVNC/utils/launch.sh
-
-
-ENV VNC_PASSWD=admin 
-ADD . /app
 COPY . /app
-RUN chmod +x /app/conf.d/websockify.sh
-RUN chmod +x /app/conf.d/x11vnc.sh
-
-
 CMD ["/app/entrypoint.sh"]
+EXPOSE 8080
