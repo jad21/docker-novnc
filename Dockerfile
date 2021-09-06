@@ -45,4 +45,5 @@ ENV VNC_PASSWD=admin
 ADD . /app
 COPY . /app
 RUN chmod +x /app/conf.d/websockify.sh
+RUN chmod +x /app/conf.d/x11vnc.sh
 CMD ["/app/entrypoint.sh"]
